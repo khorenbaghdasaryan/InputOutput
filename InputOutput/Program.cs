@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Net;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -114,14 +116,93 @@ namespace InputOutput
                     Console.WriteLine($"Name: {person.FirstName} Last: {person.LastName} Age: {person.Age}");
                 }
             }
-
        }
+    }
+
+    class NetworkIO
+    {
+        public void Start()
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.google.com");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            Stream stream = response.GetResponseStream();
+
+            for (int i = 0; ; i++)
+            {
+                int ch = stream.ReadByte();
+                if (ch == -1)
+                { 
+                    break;
+                }
+                Console.Write((char)ch);
+                if ((i % 400) == 0)
+                {
+                    Console.WriteLine("\nPress Enter");
+                    Console.ReadLine();
+                }
+            }
+            response.Close();
+        }
+    }
+    class AsynchronIO
+    {
+        Stream stream = File.OpenRead("C:\\alb.txt");
+        public byte[] buffer = new byte[256];
+        public void Start()
+        {
+            stream.BeginRead(buffer, 0, buffer.Length, new AsyncCallback(AsyncCall), null);
+            for (int i = 0; i < 90; i++)
+                Console.Write($"{i} ");
+
+        }
+
+        private void AsyncCall(IAsyncResult ar)
+        {
+            int bytesRead = stream.EndRead(ar);
+            string txt = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+            Console.WriteLine(txt);
+            for (long i = 0; i < 1; i++)
+            {
+                Console.WriteLine("-------");
+            }
+        }
+    }
+
+    class TextIO
+    {
+        public void Write()
+        {
+            FileInfo fileInfo = new FileInfo("C:\\alb.txt");
+            StreamWriter streamWriter = fileInfo.CreateText();
+
+            streamWriter.WriteLine("aaaaaaaaaaaaaaaaaaaa....");
+            streamWriter.WriteLine("bbbbbbbbbbbbbbbbbbbb....");
+
+            for (int i = 0; i < 10; i++)
+            {
+                streamWriter.Write($"{i} ");
+            }
+            streamWriter.Close();
+        }
+        public void Read()
+        {
+            StreamReader streamReader = File.OpenText("C:\\alb.txt");
+            string text = null;
+            while ((text = streamReader.ReadLine()) != null)
+            {
+                Console.WriteLine(text);
+            }
+
+            streamReader.Close();
+        }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            new JSONSerializers().Start();
+            new TextIO().Read();
+            new TextIO().Write();
         }
     }
 }
