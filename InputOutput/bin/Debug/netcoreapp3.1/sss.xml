@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Here is a comment.-->
+<Company MyAttribute="MyAttributeValue">
+  <CompanyName>AlbDarb</CompanyName>
+  <CompanyAddress>
+    <Address>123 Street</Address>
+    <City>Yerevan</City>
+    <State>Arabkir</State>
+    <Country>Armenia</Country>
+  </CompanyAddress>
+</Company>

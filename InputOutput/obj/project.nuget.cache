@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "YHxcht7WyBYtzyqOMUrEhT7TTowscDHg1Tzy4q01J+uVkpS/PxStfNLs4MiJl/fvmNHDFSk4BPBudlmPmWgvFA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\khore\\source\\repos\\InputOutput\\InputOutput\\InputOutput.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\khore\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
