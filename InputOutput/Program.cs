@@ -10,6 +10,27 @@ using System.Xml.Serialization;
 
 namespace InputOutput
 {
+    public class InfoFile
+    {
+        public void GetInfo()
+        {
+            FileInfo fileInfo = new FileInfo("c:\\arctic.gif");
+            string name = fileInfo.Name;
+            string directory = fileInfo.DirectoryName;
+            string extension = fileInfo.Extension;
+            long length = fileInfo.Length;
+            DateTime creationTime = fileInfo.CreationTime;
+            DateTime lastTime = fileInfo.LastAccessTime;
+            Console.WriteLine(lastTime);
+            Console.WriteLine(creationTime);
+            Console.WriteLine(length);
+            Console.WriteLine(extension);
+            Console.WriteLine(directory);
+            Console.WriteLine(name);
+            fileInfo.CopyTo("c:\\arctic.gif");
+            fileInfo.Delete();
+        }
+    }
     public class XmlSerializers
     {
         [Serializable]
@@ -201,8 +222,7 @@ namespace InputOutput
     {
         static void Main(string[] args)
         {
-            new TextIO().Read();
-            new TextIO().Write();
+            new InfoFile().GetInfo();
         }
     }
 }
